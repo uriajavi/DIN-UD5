@@ -11,13 +11,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *  Entity class for departments. It has the following fields: id, name and description.
  * @author Javier Martin Uria
  */
 @Entity
+@Table(name="department",schema="dindb")
+@NamedQuery(name="findAllDepartments",
+            query="SELECT d FROM Department d ORDER BY d.name DESC"
+)
+
 public class Department implements Serializable {
     @OneToMany(mappedBy = "department")
     private List<User> users;

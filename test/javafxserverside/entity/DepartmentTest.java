@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Test class for entity Department
  * @author javi
  */
 public class DepartmentTest {
