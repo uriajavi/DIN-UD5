@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,6 +26,7 @@ import javax.persistence.Table;
 @NamedQuery(name="findAllUsers",
             query="SELECT u FROM User u ORDER BY u.name DESC"
 )
+@XmlRootElement
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

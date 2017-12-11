@@ -30,6 +30,12 @@ public class UserManagerEJB implements UserManagerEJBLocal {
     //Entity manager object
     @PersistenceContext
     private EntityManager em;
+
+    @Override
+    public User findUserByLogin(String login) throws ReadException {
+        LOGGER.info("UserManager: Finding user by login.");
+        return em.find(User.class, login);
+    }
     
     @Override
     public List<User> findAllUsers() throws ReadException {

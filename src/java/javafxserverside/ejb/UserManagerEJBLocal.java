@@ -21,6 +21,7 @@ import javax.ejb.Local;
 @Local
 public interface UserManagerEJBLocal {
 
+    public User findUserByLogin(String login) throws ReadException;
     public List<User> findAllUsers() throws ReadException;
     public List<Department> findAllDepartments() throws ReadException;
     public void createUser(User user) throws CreateException;

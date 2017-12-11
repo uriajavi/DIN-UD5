@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *  Entity class for departments. It has the following fields: id, name and description.
@@ -25,6 +26,7 @@ import javax.persistence.Table;
             query="SELECT d FROM Department d ORDER BY d.name DESC"
 )
 
+@XmlRootElement
 public class Department implements Serializable {
     @OneToMany(mappedBy = "department")
     private List<User> users;
