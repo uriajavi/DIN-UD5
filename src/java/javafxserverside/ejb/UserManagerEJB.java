@@ -79,6 +79,7 @@ public class UserManagerEJB implements UserManagerEJBLocal {
     public void deleteUser(User user) throws DeleteException {
         LOGGER.info("UserManager: Deleting user.");
         try{
+            user=em.merge(user);
             em.remove(user);
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception deleting user.{0}",

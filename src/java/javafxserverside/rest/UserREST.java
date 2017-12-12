@@ -41,6 +41,7 @@ public class UserREST{
     @Consumes({"application/xml", "application/json"})
     public void create(User user) {
         try {
+            LOGGER.log(Level.INFO,"UserREST: create {0}.",user);
             ejb.createUser(user);
         } catch (CreateException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -51,6 +52,7 @@ public class UserREST{
     @Consumes({"application/xml", "application/json"})
     public void update(User user) {
         try {
+            LOGGER.log(Level.INFO,"UserREST: update {0}.",user);
             ejb.updateUser(user);
         } catch (UpdateException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -62,6 +64,7 @@ public class UserREST{
     //@Consumes({"application/xml", "application/json"})
     public void delete(@PathParam("id") String id) {
         try {
+            LOGGER.log(Level.INFO,"UserREST: delete User by id={0}.",id);
             ejb.deleteUser(ejb.findUserByLogin(id));
         } catch (ReadException | DeleteException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -74,6 +77,7 @@ public class UserREST{
     public User find(@PathParam("id") String id) {
         User user=null;
         try {
+            LOGGER.log(Level.INFO,"UserREST: find User by id={0}.",id);
             user=ejb.findUserByLogin(id);
         } catch (ReadException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -86,6 +90,7 @@ public class UserREST{
     public List<User> findAll() {
         List<User> users=null;
         try {
+            LOGGER.log(Level.INFO,"UserREST: find all users.");
             users=ejb.findAllUsers();
         } catch (ReadException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
