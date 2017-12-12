@@ -15,7 +15,6 @@ import javafxserverside.exception.DeleteException;
 import javafxserverside.exception.ReadException;
 import javafxserverside.exception.UpdateException;
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -49,9 +48,8 @@ public class UserREST{
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void update(@PathParam("id") String id, User user) {
+    public void update(User user) {
         try {
             ejb.updateUser(user);
         } catch (UpdateException ex) {
@@ -61,13 +59,13 @@ public class UserREST{
 
     @DELETE
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void delete(@PathParam("id") String id, User user) {
+    //@Consumes({"application/xml", "application/json"})
+    public void delete(@PathParam("id") String id) {
         try {
-            ejb.deleteUser(user);
-        } catch (DeleteException ex) {
+            ejb.deleteUser(ejb.findUserByLogin(id));
+        } catch (ReadException | DeleteException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     @GET
