@@ -7,6 +7,7 @@ package javafxserverside.ejb;
 
 import java.util.List;
 import javafxserverside.entity.Department;
+import javafxserverside.entity.Profile;
 import javafxserverside.entity.User;
 import javafxserverside.exception.CreateException;
 import javafxserverside.exception.DeleteException;
@@ -23,6 +24,7 @@ public interface UserManagerEJBLocal {
 
     public User findUserByLogin(String login) throws ReadException;
     public List<User> findAllUsers() throws ReadException;
+    public List<User> findUsersByProfile(Profile profile) throws ReadException;
     public List<Department> findAllDepartments() throws ReadException;
     public void createUser(User user) throws CreateException;
     public void updateUser(User user) throws UpdateException;

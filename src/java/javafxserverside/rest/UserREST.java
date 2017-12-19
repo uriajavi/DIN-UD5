@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafxserverside.ejb.UserManagerEJBLocal;
+import javafxserverside.entity.Profile;
 import javafxserverside.entity.User;
 import javafxserverside.exception.CreateException;
 import javafxserverside.exception.DeleteException;
@@ -28,7 +29,7 @@ import javax.ws.rs.Produces;
  *
  * @author javi
  */
-@Path("user")
+@Path("users")
 public class UserREST{
 
     private static final Logger LOGGER =
@@ -92,6 +93,20 @@ public class UserREST{
         try {
             LOGGER.log(Level.INFO,"UserREST: find all users.");
             users=ejb.findAllUsers();
+        } catch (ReadException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+
+    @GET
+    @Path("profile/{profile}")
+    @Produces({"application/xml", "application/json"})
+    public List<User> findUsersByProfile(@PathParam("profile") String profile) {
+        List<User> users=null;
+        try {
+            LOGGER.log(Level.INFO,"UserREST: find users by login {0}.",profile);
+            users=ejb.findUsersByProfile(Profile.valueOf(profile));
         } catch (ReadException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }

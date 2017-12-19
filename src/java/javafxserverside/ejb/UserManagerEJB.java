@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafxserverside.entity.Department;
+import javafxserverside.entity.Profile;
 import javafxserverside.entity.User;
 import javafxserverside.exception.CreateException;
 import javafxserverside.exception.DeleteException;
@@ -41,6 +42,14 @@ public class UserManagerEJB implements UserManagerEJBLocal {
     public List<User> findAllUsers() throws ReadException {
         LOGGER.info("UserManager: Reading all users.");
         return em.createNamedQuery("findAllUsers").getResultList();
+    }
+
+    @Override
+    public List<User> findUsersByProfile(Profile profile) throws ReadException {
+        LOGGER.info("UserManager: Reading users by profile.");
+        return em.createNamedQuery("findUsersByProfile")
+                 .setParameter("profile", profile)
+                 .getResultList();
     }
 
     @Override
@@ -88,5 +97,6 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         }
         LOGGER.info("UserManager: User deleted.");
     }
+
 
 }
