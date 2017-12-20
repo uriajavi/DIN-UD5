@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafxserverside.ejb.UserManagerEJBLocal;
+import javafxserverside.entity.Department;
 import javafxserverside.entity.Profile;
 import javafxserverside.entity.User;
 import javafxserverside.exception.CreateException;
@@ -105,12 +106,26 @@ public class UserREST{
     public List<User> findUsersByProfile(@PathParam("profile") String profile) {
         List<User> users=null;
         try {
-            LOGGER.log(Level.INFO,"UserREST: find users by login {0}.",profile);
+            LOGGER.log(Level.INFO,"UserREST: find users by profile {0}.",profile);
             users=ejb.findUsersByProfile(Profile.valueOf(profile));
         } catch (ReadException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
         return users;
+    }
+    
+    @GET
+    @Path("departments")
+    @Produces({"application/xml", "application/json"})
+    public List<Department> findAllDepartments() {
+        List<Department> departments=null;
+        try {
+            LOGGER.log(Level.INFO,"UserREST: find departments for users.");
+            departments=ejb.findAllDepartments();
+        } catch (ReadException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+        return departments;
     }
 
 }

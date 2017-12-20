@@ -34,28 +34,61 @@ public class UserManagerEJB implements UserManagerEJBLocal {
 
     @Override
     public User findUserByLogin(String login) throws ReadException {
-        LOGGER.info("UserManager: Finding user by login.");
-        return em.find(User.class, login);
+        User user=null;
+        try{
+            LOGGER.info("UserManager: Finding user by login.");
+            user=em.find(User.class, login);
+        }catch(Exception e){
+            LOGGER.log(Level.SEVERE, "UserManager: Exception Finding user by login:",
+                    e.getMessage());
+            throw new ReadException(e.getMessage());
+        }
+        LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
+        return user;
     }
     
     @Override
     public List<User> findAllUsers() throws ReadException {
-        LOGGER.info("UserManager: Reading all users.");
-        return em.createNamedQuery("findAllUsers").getResultList();
+        List<User> users=null;
+        try{
+            LOGGER.info("UserManager: Reading all users.");
+            users=em.createNamedQuery("findAllUsers").getResultList();
+        }catch(Exception e){
+            LOGGER.log(Level.SEVERE, "UserManager: Exception reading all users:",
+                    e.getMessage());
+            throw new ReadException(e.getMessage());
+        }
+        return users;
     }
 
     @Override
     public List<User> findUsersByProfile(Profile profile) throws ReadException {
-        LOGGER.info("UserManager: Reading users by profile.");
-        return em.createNamedQuery("findUsersByProfile")
-                 .setParameter("profile", profile)
-                 .getResultList();
+        List<User> users=null;
+        try{
+            LOGGER.info("UserManager: Reading users by profile.");
+            users=em.createNamedQuery("findUsersByProfile")
+                     .setParameter("profile", profile)
+                     .getResultList();
+        }catch(Exception e){
+            LOGGER.log(Level.SEVERE, "UserManager: Exception reading users by profile.",
+                    e.getMessage());
+            throw new ReadException(e.getMessage());
+        }
+        return users;
     }
 
     @Override
     public List<Department> findAllDepartments() throws ReadException{
-        LOGGER.info("UserManager: Reading all departments.");
-        return em.createNamedQuery("findAllDepartments").getResultList();
+        List<Department> departments=null;
+        try{
+            LOGGER.info("UserManager: Reading all departments.");
+            departments=em.createNamedQuery("findAllDepartments").getResultList();
+        }catch(Exception e){
+            LOGGER.log(Level.SEVERE, "UserManager: Exception reading departments for users",
+                    e.getMessage());
+            throw new ReadException(e.getMessage());
+        }
+        return departments;
     }
 
     @Override
