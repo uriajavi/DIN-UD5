@@ -17,7 +17,13 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *  Entity class for departments. It has the following fields: id, name and description.
+ *  Entity class for departments. It has the following fields: 
+ *  <ul>
+ *      <li><strong>id:</strong> Identifier field. Integer auto-generated value.</li>
+ *      <li><strong>name:</strong> Name of the department.</li>
+ *      <li><strong>description:</strong> Department´s long text description.</li>
+ *      <li><strong>users:</strong> A List of User objects containing all users that belong to the department.</li>
+ *  </ul>
  * @author Javier Martin Uria
  */
 @Entity
