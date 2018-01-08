@@ -43,7 +43,10 @@ public class UserManagerEJB implements UserManagerEJBLocal {
                     e.getMessage());
             throw new ReadException(e.getMessage());
         }
-        LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
+        if(user!=null) 
+            LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
+        else
+            LOGGER.log(Level.INFO,"UserManager: No User found for login = {0}",login);
         return user;
     }
     
