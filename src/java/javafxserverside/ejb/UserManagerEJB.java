@@ -25,13 +25,22 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UserManagerEJB implements UserManagerEJBLocal {
-    //logger for the class
+    /**
+     * Logger for the class.
+     */
     private static final Logger LOGGER =
             Logger.getLogger("javafxserverside");
-    //Entity manager object
+    /**
+     * Entity manager object.
+     */
     @PersistenceContext
     private EntityManager em;
-
+    /**
+     * Finds a {@link User} by its login. 
+     * @param login The login for the user to be found.
+     * @return The {@link User} object containing user data. 
+     * @throws ReadException If there is any Exception during processing.
+     */
     @Override
     public User findUserByLogin(String login) throws ReadException {
         User user=null;
@@ -49,7 +58,12 @@ public class UserManagerEJB implements UserManagerEJBLocal {
             LOGGER.log(Level.INFO,"UserManager: No User found for login = {0}",login);
         return user;
     }
-    
+    /**
+     * Finds a List of {@link User} objects containing data for all users in the
+     * application data storage.
+     * @return A List of {@link User} objects.
+     * @throws ReadException If there is any Exception during processing.
+     */
     @Override
     public List<User> findAllUsers() throws ReadException {
         List<User> users=null;
@@ -63,7 +77,13 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         }
         return users;
     }
-
+    /**
+     * Finds a List of {@link User} objects containing data for all users with certain
+     * profile value.
+     * @param profile The profile value for the users to be found.
+     * @return A List of {@link User} objects.
+     * @throws ReadException If there is any Exception during processing.
+     */
     @Override
     public List<User> findUsersByProfile(Profile profile) throws ReadException {
         List<User> users=null;
@@ -79,7 +99,12 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         }
         return users;
     }
-
+    /**
+     * Finds a List of {@link Department} objects containing data for all departments in the
+     * application data storage.
+     * @return A List of {@link Department} objects.
+     * @throws ReadException If there is any Exception during processing.
+     */
     @Override
     public List<Department> findAllDepartments() throws ReadException{
         List<Department> departments=null;
@@ -87,13 +112,18 @@ public class UserManagerEJB implements UserManagerEJBLocal {
             LOGGER.info("UserManager: Reading all departments.");
             departments=em.createNamedQuery("findAllDepartments").getResultList();
         }catch(Exception e){
-            LOGGER.log(Level.SEVERE, "UserManager: Exception reading departments for users",
+            LOGGER.log(Level.SEVERE, 
+                    "UserManager: Exception reading departments for users, {0}",
                     e.getMessage());
             throw new ReadException(e.getMessage());
         }
         return departments;
     }
-
+    /**
+     * Creates a User and stores it in the underlying application storage. 
+     * @param user The {@link User} object containing the user data. 
+     * @throws CreateException If there is any Exception during processing.
+     */
     @Override
     public void createUser(User user) throws CreateException {
         LOGGER.info("UserManager: Creating user.");
@@ -106,7 +136,11 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         }
         LOGGER.info("UserManager: User created.");
     }
-
+    /**
+     * Updates a user's data in the underlying application storage. 
+     * @param user The {@link User} object containing the user data. 
+     * @throws UpdateException If there is any Exception during processing.
+     */
     @Override
     public void updateUser(User user) throws UpdateException {
         LOGGER.info("UserManager: Updating user.");
@@ -119,7 +153,11 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         }
         LOGGER.info("UserManager: User updated.");
     }
-
+    /**
+     * Deletes a user's data in the underlying application storage. 
+     * @param user The {@link User} object containing the user data. 
+     * @throws DeleteException If there is any Exception during processing.
+     */
     @Override
     public void deleteUser(User user) throws DeleteException {
         LOGGER.info("UserManager: Deleting user.");

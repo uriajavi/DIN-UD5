@@ -6,7 +6,7 @@
 package javafxserverside.exception;
 
 /**
- *
+ * This class represents any error during user object's deletion in application storage.
  * @author javi
  */
 public class DeleteException extends Exception {

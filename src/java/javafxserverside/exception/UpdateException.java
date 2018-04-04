@@ -6,7 +6,7 @@
 package javafxserverside.exception;
 
 /**
- *
+ * This class represents any error during user object's update in application storage.
  * @author javi
  */
 public class UpdateException extends Exception {

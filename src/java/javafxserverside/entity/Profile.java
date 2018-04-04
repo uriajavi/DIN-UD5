@@ -10,6 +10,12 @@ package javafxserverside.entity;
  * @author javi
  */
 public enum Profile {
+    /**
+     * The user is a regular user.
+     */
     USER,
+    /**
+     * The user is a privileged user.
+     */
     ADMIN;
 }

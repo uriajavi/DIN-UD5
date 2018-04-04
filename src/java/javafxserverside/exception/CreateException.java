@@ -6,7 +6,7 @@
 package javafxserverside.exception;
 
 /**
- *
+ * This class represents any error during user object's creation in application storage.
  * @author javi
  */
 public class CreateException extends Exception {
@@ -17,7 +17,6 @@ public class CreateException extends Exception {
      */
     public CreateException() {
     }
-
     /**
      * Constructs an instance of <code>CreateUserException</code> with the
      * specified detail message.
