@@ -38,12 +38,12 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         try{
             LOGGER.info("UserManager: Finding user by login.");
             user=em.find(User.class, login);
+            LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception Finding user by login:",
                     e.getMessage());
             throw new ReadException(e.getMessage());
         }
-        LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
         return user;
     }
     
@@ -96,25 +96,27 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         LOGGER.info("UserManager: Creating user.");
         try{
             em.persist(user);
+            LOGGER.info("UserManager: User created.");
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception creating user.{0}",
                     e.getMessage());
             throw new CreateException(e.getMessage());
         }
-        LOGGER.info("UserManager: User created.");
     }
 
     @Override
     public void updateUser(User user) throws UpdateException {
         LOGGER.info("UserManager: Updating user.");
         try{
-            if(!em.contains(user))em.merge(user);
+            //if(!em.contains(user))em.merge(user);
+            em.merge(user);
+            em.flush();
+            LOGGER.info("UserManager: User updated.");
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception updating user.{0}",
                     e.getMessage());
             throw new UpdateException(e.getMessage());
         }
-        LOGGER.info("UserManager: User updated.");
     }
 
     @Override
@@ -123,12 +125,12 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         try{
             user=em.merge(user);
             em.remove(user);
+            LOGGER.info("UserManager: User deleted.");
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception deleting user.{0}",
                     e.getMessage());
             throw new DeleteException(e.getMessage());
         }
-        LOGGER.info("UserManager: User deleted.");
     }
 
 
