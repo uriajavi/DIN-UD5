@@ -40,7 +40,7 @@ public class User implements Serializable {
      * Id field for user entity. It is also the login id value for the user.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)->Not allowed for Hibernate
     private String login;
     /**
      * Full name of the user.
