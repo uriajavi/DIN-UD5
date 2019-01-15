@@ -47,7 +47,8 @@ public class UserManagerEJB implements UserManagerEJBLocal {
         try{
             LOGGER.info("UserManager: Finding user by login.");
             user=em.find(User.class, login);
-            LOGGER.log(Level.INFO,"UserManager: User found {0}",user.getLogin());
+            if(user!=null)LOGGER.log(Level.INFO,"UserManager: User found {0}",
+                                     user.getLogin());
         }catch(Exception e){
             LOGGER.log(Level.SEVERE, "UserManager: Exception Finding user by login:",
                     e.getMessage());
