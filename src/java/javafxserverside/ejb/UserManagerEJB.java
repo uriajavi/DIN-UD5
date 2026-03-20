@@ -15,9 +15,9 @@ import javafxserverside.exception.CreateException;
 import javafxserverside.exception.DeleteException;
 import javafxserverside.exception.ReadException;
 import javafxserverside.exception.UpdateException;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 /**
  * EJB class for managing User entity CRUD operations.

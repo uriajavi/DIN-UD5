@@ -13,7 +13,7 @@ import javafxserverside.exception.CreateException;
 import javafxserverside.exception.DeleteException;
 import javafxserverside.exception.ReadException;
 import javafxserverside.exception.UpdateException;
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  * EJB Local Interface for managing User entity CRUD operations.
